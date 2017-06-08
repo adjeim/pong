@@ -9,7 +9,7 @@ canvas.height = height;
 
 const context = canvas.getContext('2d');
 
-let ball = 100;
+let ball = 10;
 
 const step = () => {
 	update();
@@ -22,8 +22,10 @@ const update = () => {
 };
 
 const render = () => {
-	ball = ball + 5;
-	console.log(ball);
+	if (ball < 700) {
+		ball = ball + 3;
+		console.log(ball);
+	};
 
 	context.fillStyle = '#220a37';
 	context.fillRect(0, 0, canvas.width, canvas.height);
