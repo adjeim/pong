@@ -28,6 +28,7 @@ const step = () => {
 };
 
 const update = () => {
+	ball.update();
 
 };
 
@@ -74,6 +75,8 @@ function Ball(x, y) {
 	this.x = x;
 	this.y = y;
 	this.radius = 5;
+	this.speed_x = 3;
+	this.speed_y = 0;
 
 	this.render = () => {
 		context.fillStyle = '#ee7600';
@@ -82,6 +85,11 @@ function Ball(x, y) {
 		// The last two values above are the start and ending angles, in radians
 		context.fillStyle = '#ee7600';
 		context.fill();
+	};
+
+	this.update = () => {
+		this.x += this.speed_x;
+		this.y += this.speed_y;
 	};
 };
 
