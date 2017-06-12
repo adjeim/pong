@@ -28,7 +28,7 @@ const step = () => {
 };
 
 const update = () => {
-	ball.update();
+	ball.update(player.paddle, computer.paddle);
 
 };
 
@@ -52,6 +52,8 @@ function Paddle(x, y, width, height) {
 	this.y = y;
 	this.width = width;
 	this.height = height;
+	this.speed_x = 0;
+	this.speed_y = 0;
 
 	this.render = () => {
 		context.fillStyle = '#836fff';
@@ -87,9 +89,23 @@ function Ball(x, y) {
 		context.fill();
 	};
 
-	this.update = () => {
+	this.update = (playerPaddle, computerPaddle) => {
+		// Every time it updates, move the ball in horizontal and vertical directions, depending on the speed in that direction.
 		this.x += this.speed_x;
 		this.y += this.speed_y;
+
+		// If the ball hits the player's paddle, bounce back towards the computer's paddle.
+		if (this.x > width - player.paddle.width - (width - player.paddle.x - player.paddle.width)) {
+			this.speed_x = -3;
+   		this.x += this.speed_x;
+   		console.log(player.paddle.x);
+   		console.log(this.x);
+
+		};
+
+		// If the ball hits the computer's paddle, bounce back towards the player's paddle.
+
+
 	};
 };
 
