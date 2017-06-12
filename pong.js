@@ -104,6 +104,13 @@ function Ball(x, y) {
 		};
 
 		// If the ball hits the computer's paddle, bounce back towards the player's paddle.
+		if (this.x < computer.paddle.width + computer.paddle.x) {
+			this.speed_x = 3;
+   		this.x += this.speed_x;
+   		console.log(computer.paddle.x + computer.paddle.width);
+   		console.log(this.x);
+
+		};
 
 
 	};
