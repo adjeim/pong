@@ -16,12 +16,18 @@ window.onload = () => {
 
 };
 
+// Listen for keydown and keyup events to determine movement of player's paddle.
 let keyDown;
 
 window.addEventListener("keydown", function(event) {
   keyDown = event.keyCode;
   console.log(keyDown);
 });
+
+window.addEventListener("keyup", function(event) {
+  keyDown = null;
+});
+
 
 const ball = new Ball(350, 250);
 const player = new Player();
@@ -41,11 +47,6 @@ const update = () => {
 };
 
 const render = () => {
-	// if (ball < 700) {
-	// 	ball = ball + 3;
-	// 	console.log(ball);
-	// };
-
 	context.fillStyle = '#220a37';
 	context.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -77,11 +78,11 @@ function Player() {
 	this.move = (moveX, moveY) => {
 		this.paddle.x += moveX;
 		this.paddle.y += moveY;
-		console.log(this.y);
+		// console.log(this.paddle.y);
 
-		this.speed_x = this.paddle.x;
-		this.speed_y = this.paddle.y;
-		console.log(this.speed_y);
+		this.speed_x += this.paddle.x;
+		this.speed_y += this.paddle.y;
+		// console.log(this.speed_y);
 
 	};
 
@@ -89,15 +90,13 @@ function Player() {
 		// If the player presses the up key, move up. If they press the down key, move down. Otherwise don't move the paddle at all.
 		if (keyDown === 38) {
 			this.move(0, -4);
-			// console.log("should be moving up");
 
-		} else if (keyDown == 40) {
+		} else if (keyDown === 40) {
 			this.move(0, 4);
-			// console.log("should be moving down");
 
 		} else {
-
-		}
+			this.move(0, 0);
+		};
 	};
 };
 
