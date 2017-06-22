@@ -16,6 +16,13 @@ window.onload = () => {
 
 };
 
+let keyDown;
+
+window.addEventListener("keydown", function(event) {
+  keyDown = event.keyCode;
+  console.log(keyDown);
+});
+
 const ball = new Ball(350, 250);
 const player = new Player();
 const computer = new Computer();
@@ -29,6 +36,7 @@ const step = () => {
 
 const update = () => {
 	ball.update(player.paddle, computer.paddle);
+	player.update();
 
 };
 
@@ -65,6 +73,32 @@ function Paddle(x, y, width, height) {
 function Player() {
 	this.paddle = new Paddle(650, 225, 10, 70);
 	this.paddle.render();
+
+	this.move = (moveX, moveY) => {
+		this.paddle.x += moveX;
+		this.paddle.y += moveY;
+		console.log(this.y);
+
+		this.speed_x = this.paddle.x;
+		this.speed_y = this.paddle.y;
+		console.log(this.speed_y);
+
+	};
+
+	this.update = () => {
+		// If the player presses the up key, move up. If they press the down key, move down. Otherwise don't move the paddle at all.
+		if (keyDown === 38) {
+			this.move(0, -4);
+			// console.log("should be moving up");
+
+		} else if (keyDown == 40) {
+			this.move(0, 4);
+			// console.log("should be moving down");
+
+		} else {
+
+		}
+	};
 };
 
 function Computer() {
